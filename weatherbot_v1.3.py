@@ -9,7 +9,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 os.system('clear')
 dotenv.load_dotenv()
-TOKEN = os.getenv('DEV_TOKEN')
+TOKEN = os.getenv('TOKEN') #환경설정 파일(.env)에 텔레그램 토큰 변수를 설정한다.
 
 def get_weather(where):
 
@@ -225,10 +225,8 @@ async def weather_searcher(update, context):
 
 def main() -> None:
     """Start the bot."""
-    application = Application.builder().token(TOKEN).build()
-    # application.add_handler(CommandHandler(["w", "weather"], weather_searcher))
+    application = Application.builder().token(TOKEN).build() 
     application.add_handler(MessageHandler(filters.Regex(r'/날씨|/w|ㅉ|ㅉㅈ|/W'), weather_searcher)) #어떤 문자라도 echo 메쏘드로 연결(명령빼고)
-    #filters.TEXT : 어떤 메세지라도 모두, ~filters.COMMAND '/'등 명령어는 제외
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
